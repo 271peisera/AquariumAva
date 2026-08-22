@@ -11,6 +11,8 @@ public class AquariumApp {
         tank[1] = new Fish("Dory", 30, 2, -1, "><((('>");
         tank[2] = new Shark("Sharky", 15, 2, 1, "⟩<^«⋗");
         tank[3] = new Turtle("Terry", 6, 1, -1, "🐢");
+
+        
         // =====================================================
         // STUDENT TODO
         // =====================================================
@@ -24,6 +26,12 @@ public class AquariumApp {
 
         Aquarium aquarium = new Aquarium(tank);
         Scanner input = new Scanner(System.in);
+        
+        for (SeaCreature creature : tank) {
+ 	        if (creature != null) {
+                         creature.move(Aquarium.TANK_WIDTH);
+ 	        }
+        }
 
         boolean running = true;
 
