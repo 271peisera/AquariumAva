@@ -1,0 +1,21 @@
+Final Reflection. Create a .txt document and add it to your repository
+1. Give one example of inheritance in your project. What was inherited?
+    The shark class inherited methods and instance varibles from the SeaCreature class because it made it easier and 
+    quicker to code a branch of the SeaCreature class then create a new class from scratch.
+
+2. Give one example of method overriding. Why did the subclass need its own version of the method?
+    The turtle class overode the SeaCreature method move() to cause the turtle to sometimes not move forward.
+
+3. Why can a SeaCreature[] contain Fish, Shark, Turtle, and other subclasses?
+    A SeaCreature[] can contain Fish, Shark, Turtle, and other subclasses 
+    because each of those classes inherits from SeaCreature.
+
+4. Describe one example from the Reference Lab that demonstrates two variables referring to the same object.
+    Nemo and copy refer to the same object.
+
+5. Which Git commit best represents meaningful progress in your project? Why?
+    "Added Shark and Turtle classes" because it was when I created the classes Shark and Turtle.
+
+6. If this aquarium had 1,000 creatures, what part of your design would you want to reconsider?
+    I would probably allow multiple creatures to be on one line in the aquarium instead of all of them having their
+    own line.
