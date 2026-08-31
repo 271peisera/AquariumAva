@@ -8,10 +8,46 @@ public class AquariumApp {
         SeaCreature[] tank = new SeaCreature[8];
 
         // Two starter creatures.
-        tank[0] = new Fish("Nemo", 4, 3, 1, "><>");
-        tank[1] = new Fish("Dory", 30, 2, -1, "><((('>");
-        tank[2] = new Shark("Sharky", 15, 2, 1, "⟩<^«⋗");
-        tank[3] = new Turtle("Terry", 6, 1, -1, "🐢");
+        
+        //Nemo the fish, starting at position 4, moving right at speed 4, with symbol "><>"
+        try{
+            tank[0] = new Fish("Nemo", 4, 4, 1, "><>");
+        } 
+        catch (InvalidCreatureException e) {
+            System.out.println("Error creating creature: " + e.getMessage());
+        }
+
+        //Dory the fish, starting at position 30, moving left at speed 2, with symbol "><((('>"
+        try{
+            tank[1] = new Fish("Dory", 30, 2, -1, "><((('>");
+        } 
+        catch (InvalidCreatureException e) {
+            System.out.println("Error creating creature: " + e.getMessage());
+        }
+
+        //Sharky the shark, starting at position 15, moving right at speed 2, with symbol "⟩<^«⋗"
+        try{
+            tank[2] = new Shark("Sharky", 15, 2, 1, "⟩<^«⋗");
+        } 
+        catch (InvalidCreatureException e) {
+            System.out.println("Error creating creature: " + e.getMessage());
+        }
+
+        //Terry the turtle, starting at position 6, moving left at speed 1, with symbol "🐢"
+        try{
+            tank[3] = new Turtle("Terry", 6, 1, -1, "🐢");
+        } 
+        catch (InvalidCreatureException e) {
+            System.out.println("Error creating creature: " + e.getMessage());
+        }
+        
+        //Bubbles the fish, starting at position 10, moving right at speed 2, with symbol "><>"
+        try{
+            tank[4] = new Fish("Bubbles", 10, 2, 1, "><>");
+        } 
+        catch (InvalidCreatureException e) {
+            System.out.println("Error creating creature: " + e.getMessage());
+        }
 
         
         // =====================================================

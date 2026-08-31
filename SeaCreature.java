@@ -6,6 +6,13 @@ public abstract class SeaCreature {
     protected int direction;
 
     public SeaCreature(String name, int position, int speed, int direction) {
+        if(name == null || !name.matches("[a-zA-Z]+")) {
+            throw new InvalidCreatureException("Invalid creature name");
+        }
+        if(position < 0) {
+            throw new InvalidCreatureException("Position cannot be negative");
+        }
+        
         this.name = name;
         this.position = position;
         this.speed = speed;
