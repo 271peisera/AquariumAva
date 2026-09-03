@@ -1,3 +1,7 @@
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
+
 public abstract class SeaCreature {
 
     protected String name;
@@ -52,6 +56,8 @@ public abstract class SeaCreature {
     public void turnAround() {
         direction *= -1;
     }
+
+
 
     protected void keepInsideTank(int tankWidth) {
         int maxPosition = Math.max(0, tankWidth - getSymbol().length());

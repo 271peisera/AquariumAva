@@ -1,3 +1,4 @@
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -7,11 +8,87 @@ public class AquariumApp {
 
         SeaCreature[] tank = new SeaCreature[8];
 
-        // Two starter creatures.
+        public SeaCreature[] loadSeaCreature(String fileName){
+        throw new IOException("Error reading creature data");
+        }
+            FileReader file = new FileReader(fileName);
+            Scanner inputs = new Scanner(file);
+
+            int numCreatures = inputs.nextInt();
+            inputs.nextLine();
+
+            SeaCreature[] tank = new SeaCreature[numCreatures];
+
+            for(int i = 0; i < tank.length; i++){
+                String line = inputs.nextLine();
+                tank[i] = createCreature(line);
+            }
+
+            inputs.close();
+            return tank;
         
+    }
+
+    public SeaCreature createCreature(String line){
+        FileReader file = new FileReader("creatures.txt");
+        Scanner inpu = new Scanner(file);
+
+        int num = inpu.nextInt();
+        inpu.nextLine();
+
+        String name = null;
+        int position = 0;
+        int speed = 0;
+        int direction = 0;
+        String symbol = null;
+        String creature = null;
+
+
+
+        for(int i = 0; i < num; i++){
+            inpu.useDelimiter(line);
+            creature = inpu.next();
+            name = inpu.next();
+            position = inpu.nextInt();
+            speed = inpu.nextInt();
+            direction = inpu.nextInt();
+            symbol = inpu.next();
+        }
+
+        if(creature.equals("Fish")){
+            try{
+                return new Fish(name, position, speed, direction, symbol);
+            } catch (InvalidCreatureException e) {
+                System.out.println("Error creating creature: " + e.getMessage());
+            }
+        } else if (creature.equals("Shark")){
+            try{
+                return new Shark(name, position, speed, direction, symbol);
+            } catch (InvalidCreatureException e) {
+                System.out.println("Error creating creature: " + e.getMessage());
+            }
+        } else if (creature.equals("Turtle")){
+            try{
+                return new Turtle(name, position, speed, direction, symbol);
+            } catch (InvalidCreatureException e) {
+                System.out.println("Error creating creature: " + e.getMessage());
+            }
+        } else {
+            throw new InvalidCreatureException("Invalid creature type");
+        }
+
+    }
+        try {
+            tank = loadSeaCreature("creatures.txt");
+        } catch (IOException e) {
+            System.out.println("Error reading creature data: " + e.getMessage());
+        }
+
+        // Two starter creatures.
+        /*
         //Nemo the fish, starting at position 4, moving right at speed 4, with symbol "><>"
         try{
-            tank[0] = new Fish("Nemo", 4, 4, 1, "><>");
+            //tank[0] = new Fish("Nemo", 4, 4, 1, "><>");
         } 
         catch (InvalidCreatureException e) {
             System.out.println("Error creating creature: " + e.getMessage());
@@ -19,7 +96,7 @@ public class AquariumApp {
 
         //Dory the fish, starting at position 30, moving left at speed 2, with symbol "><((('>"
         try{
-            tank[1] = new Fish("Dory", 30, 2, -1, "><((('>");
+            //tank[1] = new Fish("Dory", 30, 2, -1, "><((('>");
         } 
         catch (InvalidCreatureException e) {
             System.out.println("Error creating creature: " + e.getMessage());
@@ -27,7 +104,7 @@ public class AquariumApp {
 
         //Sharky the shark, starting at position 15, moving right at speed 2, with symbol "⟩<^«⋗"
         try{
-            tank[2] = new Shark("Sharky", 15, 2, 1, "⟩<^«⋗");
+            //tank[2] = new Shark("Sharky", 15, 2, 1, "⟩<^«⋗");
         } 
         catch (InvalidCreatureException e) {
             System.out.println("Error creating creature: " + e.getMessage());
@@ -35,7 +112,7 @@ public class AquariumApp {
 
         //Terry the turtle, starting at position 6, moving left at speed 1, with symbol "🐢"
         try{
-            tank[3] = new Turtle("Terry", 6, 1, -1, "🐢");
+            //tank[3] = new Turtle("Terry", 6, 1, -1, "🐢");
         } 
         catch (InvalidCreatureException e) {
             System.out.println("Error creating creature: " + e.getMessage());
@@ -43,12 +120,13 @@ public class AquariumApp {
         
         //Bubbles the fish, starting at position 10, moving right at speed 2, with symbol "><>"
         try{
-            tank[4] = new Fish("Bubbles", 10, 2, 1, "><>");
+            //tank[4] = new Fish("Bubbles", 10, 2, 1, "><>");
         } 
         catch (InvalidCreatureException e) {
             System.out.println("Error creating creature: " + e.getMessage());
         }
-
+        
+        */
         
         // =====================================================
         // STUDENT TODO
