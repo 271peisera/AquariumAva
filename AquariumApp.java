@@ -164,9 +164,13 @@ public class AquariumApp {
 
             SeaCreature[] tank = new SeaCreature[numCreatures];
 
-            for(int i = 0; i < tank.length; i++){
+            for (int i = 0; i < tank.length; i++) {
                 String line = inputs.nextLine();
-                tank[i] = createCreature(line);
+                try {
+                    tank[i] = createCreature(line);
+                } catch (InvalidCreatureException e) {
+                    System.out.println("Skipping creature " + (i + 1) + ": " + e.getMessage());
+                }
             }
 
             return tank;
