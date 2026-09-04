@@ -8,80 +8,14 @@ public class AquariumApp {
 
         SeaCreature[] tank = new SeaCreature[8];
 
-        public SeaCreature[] loadSeaCreature(String fileName){
-        throw new IOException("Error reading creature data");
-        }
-            FileReader file = new FileReader(fileName);
-            Scanner inputs = new Scanner(file);
-
-            int numCreatures = inputs.nextInt();
-            inputs.nextLine();
-
-            SeaCreature[] tank = new SeaCreature[numCreatures];
-
-            for(int i = 0; i < tank.length; i++){
-                String line = inputs.nextLine();
-                tank[i] = createCreature(line);
-            }
-
-            inputs.close();
-            return tank;
         
-    }
-
-    public SeaCreature createCreature(String line){
-        FileReader file = new FileReader("creatures.txt");
-        Scanner inpu = new Scanner(file);
-
-        int num = inpu.nextInt();
-        inpu.nextLine();
-
-        String name = null;
-        int position = 0;
-        int speed = 0;
-        int direction = 0;
-        String symbol = null;
-        String creature = null;
-
-
-
-        for(int i = 0; i < num; i++){
-            inpu.useDelimiter(line);
-            creature = inpu.next();
-            name = inpu.next();
-            position = inpu.nextInt();
-            speed = inpu.nextInt();
-            direction = inpu.nextInt();
-            symbol = inpu.next();
-        }
-
-        if(creature.equals("Fish")){
-            try{
-                return new Fish(name, position, speed, direction, symbol);
-            } catch (InvalidCreatureException e) {
-                System.out.println("Error creating creature: " + e.getMessage());
-            }
-        } else if (creature.equals("Shark")){
-            try{
-                return new Shark(name, position, speed, direction, symbol);
-            } catch (InvalidCreatureException e) {
-                System.out.println("Error creating creature: " + e.getMessage());
-            }
-        } else if (creature.equals("Turtle")){
-            try{
-                return new Turtle(name, position, speed, direction, symbol);
-            } catch (InvalidCreatureException e) {
-                System.out.println("Error creating creature: " + e.getMessage());
-            }
-        } else {
-            throw new InvalidCreatureException("Invalid creature type");
-        }
-
-    }
         try {
             tank = loadSeaCreature("creatures.txt");
         } catch (IOException e) {
             System.out.println("Error reading creature data: " + e.getMessage());
+        }
+        catch (InvalidCreatureException e) {
+            System.out.println("Error creating creature: " + e.getMessage());
         }
 
         // Two starter creatures.
@@ -220,5 +154,47 @@ public class AquariumApp {
         System.out.println("4. View Creature Details");
         System.out.println("5. Stop Free Swim");
         System.out.println("6. Quit");
+    }
+    public static SeaCreature[] loadSeaCreature(String filename) throws IOException, InvalidCreatureException {
+        try (FileReader file = new FileReader(filename);
+             Scanner inputs = new Scanner(file)) {
+
+            int numCreatures = inputs.nextInt();
+            inputs.nextLine();
+
+            SeaCreature[] tank = new SeaCreature[numCreatures];
+
+            for(int i = 0; i < tank.length; i++){
+                String line = inputs.nextLine();
+                tank[i] = createCreature(line);
+            }
+
+            return tank;
+            }
+    }
+
+    public static SeaCreature createCreature(String line) throws InvalidCreatureException {
+
+        try (Scanner inpu = new Scanner(line)) {
+            inpu.useDelimiter(",");
+
+            String creature = inpu.next();
+            String name = inpu.next();
+            int position = inpu.nextInt();
+            int speed = inpu.nextInt();
+            int direction = inpu.nextInt();
+            String symbol = inpu.next();
+
+            if (creature.equals("Fish")) {
+                return new Fish(name, position, speed, direction, symbol);
+            } else if (creature.equals("Shark")) {
+                return new Shark(name, position, speed, direction, symbol);
+            } else if (creature.equals("Turtle")) {
+                return new Turtle(name, position, speed, direction, symbol);
+            } else {
+                throw new InvalidCreatureException("Invalid creature type: " + creature);
+            }
+        }
+
     }
 }

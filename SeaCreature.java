@@ -57,7 +57,7 @@ public abstract class SeaCreature {
         direction *= -1;
     }
 
-
+    
 
     protected void keepInsideTank(int tankWidth) {
         int maxPosition = Math.max(0, tankWidth - getSymbol().length());
